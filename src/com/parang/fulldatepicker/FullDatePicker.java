@@ -27,7 +27,7 @@ public class FullDatePicker extends RelativeLayout {
     int calendarType = 0;
     private LocalDate date;
     private int minYear = 1, maxYear = 9999;
-    private boolean maxNow = false;
+    private boolean maxNow = false, minNow = false;
     private int yearRange;
     
     public boolean isMaxNow() {
@@ -36,6 +36,14 @@ public class FullDatePicker extends RelativeLayout {
 
 	public void setMaxNow(boolean maxNow) {
 		this.maxNow = maxNow;
+	}
+	
+	public boolean isMinNow() {
+		return minNow;
+	}
+
+	public void setMinNow(boolean minNow) {
+		this.minNow = minNow;
 	}
 
 	public LocalDate getDate() {
@@ -84,17 +92,35 @@ public class FullDatePicker extends RelativeLayout {
         int iranianMonth = jdf.getIranianMonth();
         int iranianDay = jdf.getIranianDay();
 
-        if(maxNow == false){
+        if(maxNow == false && minNow == false){
         	npYear.setMinValue(getMinYear());
         	npYear.setMaxValue(getMaxYear());
         }
-        else{
+        else if(maxNow == true && minNow == false){
         	if(calendarType == 0)
         		npYear.setMaxValue(jdf.getIranianYear());
-        	else if(calendarType ==1 )
+        	else if(calendarType ==1)
         		npYear.setMaxValue(jdf.getGregorianYear());
         	npYear.setMinValue(npYear.getMaxValue() - yearRange);
         }
+        else if(maxNow == false && minNow == true){
+        	if(calendarType == 0)
+        		npYear.setMinValue(jdf.getIranianYear());
+        	else if(calendarType == 1)
+        		npYear.setMinValue(jdf.getGregorianYear());
+        	npYear.setMaxValue(npYear.getMaxValue() + yearRange);
+        }
+        else if(maxNow == true && minNow == true){
+        	if(calendarType == 0){
+        		npYear.setMinValue(jdf.getIranianYear());
+        		npYear.setMaxValue(jdf.getIranianYear());
+        	}
+        	else if(calendarType == 1){
+        		npYear.setMinValue(jdf.getGregorianYear());
+        		npYear.setMaxValue(jdf.getGregorianYear());
+        	}
+        }
+        
         npYear.setWrapSelectorWheel(true);
         npMonth.setMinValue(1);
         npMonth.setMaxValue(12);
