@@ -108,7 +108,7 @@ public class FullDatePicker extends RelativeLayout {
         		npYear.setMinValue(jdf.getIranianYear());
         	else if(calendarType == 1)
         		npYear.setMinValue(jdf.getGregorianYear());
-        	npYear.setMaxValue(npYear.getMaxValue() + yearRange);
+        	npYear.setMaxValue(npYear.getMinValue() + yearRange);
         }
         else if(maxNow == true && minNow == true){
         	if(calendarType == 0){
