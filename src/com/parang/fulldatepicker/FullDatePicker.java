@@ -129,9 +129,16 @@ public class FullDatePicker extends RelativeLayout {
         npDay.setMinValue(1);
         npDay.setMaxValue(31);
 
-        npYear.setValue(iranianYear);
-        npMonth.setValue(iranianMonth);
-        npDay.setValue(iranianDay);
+        if(calendarType == 0){
+        	npYear.setValue(iranianYear);
+        	npMonth.setValue(iranianMonth);
+        	npDay.setValue(iranianDay);
+        }
+        else if(calendarType == 1){
+        	npYear.setValue(jdf.getGregorianYear());
+        	npMonth.setValue(jdf.getGregorianMonth());
+        	npDay.setValue(jdf.getGregorianDay());
+        }
 	}
 	
 	public FullDatePicker(Context context, AttributeSet attr){
